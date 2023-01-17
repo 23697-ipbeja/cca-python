@@ -1,4 +1,4 @@
-class Cesar:
+""" class Cesar:
 
     def __init__(self, message = None, key = None):
         self.__message = message
@@ -75,4 +75,4 @@ class Cesar:
         return self.__cryptogram
     
     def getKey(self):
-        return self.__key
+        return self.__key """
