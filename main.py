@@ -65,7 +65,7 @@ while mainChoice.lower() != "x":
                         key = 35
                         msgKeyCesar = Cesar(message,key)
                         cryptogram = msgKeyCesar.encrypt(message,key)
-                        print(encrypt)
+                        print(cryptogram)
                         time.sleep(3)
 
                     case "2":
