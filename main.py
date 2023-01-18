@@ -5,20 +5,23 @@
 #   Titulo: Exercicios Python                   
 #   Autores: David Henriques (23697)            
 #             Jo�o Tavanez (3109)               
-#                                               
+# 
+#                                              
 
 from classes.cesar import Cesar
+from classes.viginere import Viginere
 import os
 import time
+import sys
+sys.getdefaultencoding()
 
 # Clear Screen Windows/Linux
 def clearScreen():
     os.system('cls' if os.name=='nt' else 'clear')
 
-message = "herois do mar nobre povo"
-key = 35
 mainChoice = ""
 subChoice = ""
+cryptogram =""
 
 
 # Menu
@@ -26,7 +29,7 @@ while mainChoice.lower() != "x":
     clearScreen()
     print("MENU DE TIPO DE CIFRA")
     print("")
-    print("1: Cesar")
+    print("1: César")
     print("2: Viginere")
     print("3: Playfair")
     print("4: Rail-Fence")
@@ -35,7 +38,7 @@ while mainChoice.lower() != "x":
     print("")
     print("Prima X Para Sair")
     print("")
-    mainChoice = input("Por favor selecione uma opcao ")
+    mainChoice = input("Por favor selecione uma opção ")
     
     match mainChoice.lower():
         
@@ -46,30 +49,34 @@ while mainChoice.lower() != "x":
                 clearScreen()
                 print("Cifra de Cesar")
                 print("")
-                print("Escolha a opcao:")
+                print("Escolha a opção:")
                 print("1: Cifrar")
                 print("2: Decifrar")
                 print("3: Quebrar a Cifra")
                 print("")
                 print("Prima X Para Sair")
                 print("")
-                subChoice = input("Por favor selecione uma opcao ")
+                subChoice = input("Por favor selecione uma opção ")
                 print("")
                 match subChoice.lower():
                     
                     case "1":
+                        message = "herois do mar nobre povo"
+                        key = 35
                         msgKeyCesar = Cesar(message,key)
-                        encrypt = msgKeyCesar.encrypt(message,key)
+                        cryptogram = msgKeyCesar.encrypt(message,key)
                         print(encrypt)
                         time.sleep(3)
 
                     case "2":
+                        message = "herois do mar nobre povo"
+                        key = 35
                         msgKeyCesar = Cesar(message,key)
                         cryptogram = msgKeyCesar.encrypt(message,key)
                         print(cryptogram)
                         print("")
-                        decrypt = msgKeyCesar.decrypt(cryptogram,key)
-                        print(decrypt)
+                        plaintext = msgKeyCesar.decrypt(cryptogram,key)
+                        print(plaintext)
                         time.sleep(3)
                     
                     case "3":
@@ -79,42 +86,59 @@ while mainChoice.lower() != "x":
                         break
                     
                     case _:
-                        print("Opcao Invalida ")
+                        print("Opção Inválida ")
                         time.sleep(2)             
         
         # Viginere Cypher        
         case "2":
 
+            clearScreen()
             while subChoice.lower() != "X":
-                            clearScreen()
-                            print("Cifra de Viginere")
+                print("")
+                print("Cifra de Viginere")
+                print("")
+                print("Escolha a opção:")
+                print("1: Cifrar")
+                print("2: Decifrar")
+                print("3: Quebrar a Cifra")
+                print("")
+                print("Prima X Para Sair")
+                print("")
+                subChoice = input("Por favor selecione uma opção ")
+                print("")
+                match subChoice.lower():
+                    
+                    case "1":
+                        message = "herois do mar nobre povo, nacao valente e imortal"
+                        key      = "portugal"
+                        print("Message: ", message," Key: ", key)
+                        print("")
+                        msgKeyViginere = Viginere(message,key)
+                        cryptogram = msgKeyViginere.encrypt(message,key)
+                        print(cryptogram)
+                        time.sleep(3)
+                    
+                    case "2":
+                        if cryptogram != "":
+                            msgKeyViginere = Viginere(message,key)
                             print("")
-                            print("Escolha a opcao:")
-                            print("1: Cifrar")
-                            print("2: Decifrar")
-                            print("3: Quebrar a Cifra")
-                            print("")
-                            print("Prima X Para Sair")
-                            print("")
-                            subChoice = input("Por favor selecione uma opcao ")
-                            print("")
-                            match subChoice.lower():
-                                
-                                case "1":
-                                    print("viginere.cifrar()")
-                                
-                                case "2":
-                                    print("viginere.decifrar()")
-                                
-                                case "3":
-                                    print("viginere.bruto()")
-                                
-                                case "x":
-                                    break
-                                
-                                case _:
-                                    print("Opcao Invalida ")
-                                    time.sleep(2)         
+                            plaintext = msgKeyViginere.decrypt(cryptogram,key)
+                            print(plaintext)
+                            time.sleep(3)
+                        else:
+                            print("É necessário cifrar primeiro")
+
+                    
+                    case "3":
+                        print("viginere.bruto()")
+                    
+                    case "x":
+                        clearScreen()
+                        break
+                    
+                    case _:
+                        print("Opção Inválida ")
+                        time.sleep(2)         
 
         # Playfair Cypher
         case "3":
