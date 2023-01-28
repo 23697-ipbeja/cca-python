@@ -1,10 +1,9 @@
-letters = "abcdefghijklmnopqrstuvwxyz .,;:?!-"
+from langdetect import detect
+
+letters = "abcdefghijklmnopqrstuvwxyz"
+
 
 class Viginere:
-
-    def __init__(self, message, key):
-        self.message = message
-        self.key = key
 
     def encrypt(self, message, key):
         result = ""
@@ -25,4 +24,14 @@ class Viginere:
             else:
                 result += cryptogram[i]
         return result
+
+    def breakViginere(self, cryptogram):
+        with open("src\wordlist.txt", "r") as wordlist:
+            for key in wordlist:
+                key = key[:-1]
+                message = self.decrypt(cryptogram, key)
+                #print(detect(message), message)
+                if detect(message) == "pt": return message
+        return cryptogram
+
 
